@@ -32,3 +32,22 @@ Route::group([
     Route::post('register', 'App\Http\Controllers\AuthController@register');
 
 });
+
+/* 
+
+Protect create, update, delete routes with middleware
+*/
+
+Route::get('index', 'App\Http\Controllers\ArticleController@index');
+
+Route::group([
+
+    'middleware' => 'api',
+    
+
+], function ($router) {    
+   Route::post('/articles', 'App\Http\Controllers\ArticleController@store');
+   Route::put('/articles/{id}', 'App\Http\Controllers\ArticleController@update');
+   Route::delete('/articles/{id}', 'App\Http\Controllers\ArticleController@destroy');
+
+});
